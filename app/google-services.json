@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "776532588940",
+    "firebase_url": "ENTER YOUR FIREBASE URL",
+    "project_id": "csci3130-winter2022-a2",
+    "storage_bucket": "csci3130-winter2022-a2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:776532588940:android:2cde09ee4939a8ebddfea9",
+        "android_client_info": {
+          "package_name": "ca.dal.cs.csci3130.a2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "776532588940-sh24ja31i25cmlp9ucoc95nl14lncr88.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6dlzeSHYotFYWWXKmp_cplMBwNFaqIAI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "776532588940-sh24ja31i25cmlp9ucoc95nl14lncr88.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
