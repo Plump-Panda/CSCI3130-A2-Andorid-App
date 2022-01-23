@@ -31,28 +31,33 @@ public class JUnitTest {
         assertEquals(4, 2 + 2);
     }
 
+    /**UAT-II*/
     @Test
     public void checkIfNetIDIsEmpty() {
         assertTrue(mainActivity.isEmptyNetID(""));
         assertFalse(mainActivity.isEmptyNetID("xyz$56"));
     }
 
+    /**UAT-III*/
     @Test
     public void checkIfNetIDIsValid() {
         assertTrue(mainActivity.isValidNetID("xy123456"));
     }
 
+    /**UAT-III*/
     @Test
     public void checkIfNetIDIsInvalid() {
         assertFalse(mainActivity.isValidNetID("123ab456"));
         assertFalse(mainActivity.isValidNetID("abc12345"));
     }
 
+    /**UAT-IV*/
     @Test
     public void checkIfEmailIsValid() {
         assertTrue(mainActivity.isValidEmailAddress("abc123@dal.ca"));
     }
 
+    /**UAT-IV*/
     @Test
     public void checkIfEmailIsInvalid() {
         assertFalse(mainActivity.isValidEmailAddress("abc.123dal.ca"));

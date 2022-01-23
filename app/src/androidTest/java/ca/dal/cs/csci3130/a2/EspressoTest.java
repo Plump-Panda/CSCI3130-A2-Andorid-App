@@ -114,7 +114,7 @@ public class EspressoTest {
         onView(withId(R.id.statusLabel)).check(matches(withText(R.string.INVALID_DAL_EMAIL)));
     }
 
-    /**check UAT-5 in isolation*/
+    /**check UAT-V in isolation*/
     /***UAT-V**/
     @Test
     public void checkIfMoved2WelcomePage() {
