@@ -8,12 +8,20 @@ import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public static String WELCOME_MESSAGE = "ca.dal.csci3130.a2.welcome";
+    private FirebaseDatabase database;
+    private String FirebaseURL = "https://csci-3130-a2-4ebd5-default-rtdb.firebaseio.com/";
+    private DatabaseReference email;
+    private DatabaseReference netID;
+    public static final String EMAIL = "ca.dal.cs.csci3130.a2.EMAIL";
+    public static final String NETID = "ca.dal.cs.csci3130.a2.NETID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +36,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     protected void initializeDatabase() {
         //initialize the database and the two references related to net ID and email address.
+        database = FirebaseDatabase.getInstance(FirebaseURL);
+        email = database.getReference("email");
+        netID = database.getReference("netID");
     }
 
 
@@ -99,12 +110,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     protected Task<Void> saveNetIDToFirebase(String netID) {
-        //buggy method, implement it.
+        this.netID.setValue(netID);
         return null;
     }
 
     protected Task<Void> saveEmailToFirebase(String emailAddress) {
-        //buggy method, implement it.
+        email.setValue(emailAddress);
         return null;
     }
 
@@ -137,6 +148,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //No errors, we can move forward
         if(errorMessage.length() == 0){
+
+            //Save data to firebase
+            saveEmailToFirebase(emailAddress);
+            saveNetIDToFirebase(netID);
+
             //Switch to new activity
             switch2WelcomeWindow(netID,emailAddress);
         }else{
