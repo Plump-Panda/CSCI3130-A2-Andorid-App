@@ -7,6 +7,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.Task;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -69,13 +71,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     protected boolean isValidEmailAddress(String emailAddress) {
-        //buggy method, implement it.
-        return false;
+        //Use regex to check if the email is valid
+        Pattern regex = Pattern.compile("^[A-Za-z0-9\\.]+@[A-Za-z0-9]+\\.[A-Za-z]{2,}$");
+        Matcher email = regex.matcher(emailAddress);
+        return email.matches();
     }
 
     protected boolean isDALEmailAddress(String emailAddress) {
-        //buggy method implement it.
-        return false;
+        return emailAddress.contains("dal.ca");
     }
 
     protected void setStatusMessage(String message) {
@@ -114,7 +117,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             errorMessage = getResources().getString(R.string.EMPTY_NET_ID).trim();
             System.out.println(errorMessage);
         }
-        //This method is incomplete, your business logic goes here!
+
+        if(!isValidEmailAddress(emailAddress)){
+            errorMessage = getResources().getString(R.string.INVALID_EMAIL_ADDRESS).trim();
+            System.out.println(errorMessage);
+        }
+
+        if(!isDALEmailAddress(emailAddress)){
+            errorMessage = getResources().getString(R.string.INVALID_DAL_EMAIL).trim();
+            System.out.println(errorMessage);
+        }
         setStatusMessage(errorMessage);
     }
 }
