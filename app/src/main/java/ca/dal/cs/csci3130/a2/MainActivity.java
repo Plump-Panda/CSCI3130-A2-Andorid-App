@@ -1,5 +1,6 @@
 package ca.dal.cs.csci3130.a2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -88,7 +89,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     protected void switch2WelcomeWindow(String netID, String emailAddress) {
-        //your business logic goes here!
+        Intent intent = new Intent(getBaseContext(), WelcomeActivity.class);
+
+        //Send data to intent
+        intent.putExtra(EMAIL, emailAddress);
+        intent.putExtra(NETID, netID);
+
+        startActivity(intent);
     }
 
     protected Task<Void> saveNetIDToFirebase(String netID) {
@@ -127,6 +134,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             errorMessage = getResources().getString(R.string.INVALID_DAL_EMAIL).trim();
             System.out.println(errorMessage);
         }
-        setStatusMessage(errorMessage);
+
+        //No errors, we can move forward
+        if(errorMessage.length() == 0){
+            //Switch to new activity
+            switch2WelcomeWindow(netID,emailAddress);
+        }else{
+            //Show error message
+            setStatusMessage(errorMessage);
+        }
     }
 }
