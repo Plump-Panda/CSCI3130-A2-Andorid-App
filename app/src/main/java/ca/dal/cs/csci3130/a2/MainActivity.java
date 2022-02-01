@@ -44,7 +44,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     protected boolean isValidNetID(String netID) {
-        //buggy method, implement it.
+        //Is the netID the right length
+        if(netID.length() == 8){
+            //Check if we have 2 letters at the beginning
+            int c1 = netID.charAt(0);
+            int c2 = netID.charAt(1);
+            boolean firstCharacterIsValid = ((c1 >= 65) && (c1 <=90)) || ((c1 >= 97) && (c1 <= 122));
+            boolean secondCharacterIsValid = ((c2 >= 65) && (c2 <=90)) || ((c2 >= 97) && (c2 <= 122));
+
+            //We don't have 2 letters at the beginning
+            if(!firstCharacterIsValid || !secondCharacterIsValid){
+                return false;
+            }
+
+            //Check if we have 6 numbers at the end
+            try{
+                Integer.parseInt(netID.substring(2,7));
+            }catch (Exception e){
+                return false;
+            }
+            return true;
+        }
         return false;
     }
 
@@ -83,9 +103,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         String netID = getNetID();
         String emailAddress = getEmailAddress();
-        String errorMessage = new String("ERROR MESSAGE");
+        String errorMessage = "";
 
-        if (isEmptyNetID(netID)) {
+        if(!isValidNetID(netID)){
+            errorMessage = getResources().getString(R.string.INVALID_NET_ID).trim();
+            System.out.println(errorMessage);
+        }
+
+        if(isEmptyNetID(netID)){
             errorMessage = getResources().getString(R.string.EMPTY_NET_ID).trim();
             System.out.println(errorMessage);
         }
